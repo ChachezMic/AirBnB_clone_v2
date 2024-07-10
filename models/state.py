@@ -1,8 +1,6 @@
 #!/usr/bin/python3
 """
 State class for creating State table
-#!/Users/mistarkelly/vagrant_project/My-Projects/ALX-ONLY/AirBnB_clone_v2/.venv/bin/python3
-
 """
 from models.base_model import BaseModel, Base
 from sqlalchemy.orm import relationship
