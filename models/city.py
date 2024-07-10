@@ -1,19 +1,22 @@
-#!/usr/bin/python3
-"""This is the city class"""
+#!/usr/bin/python
+""" holds class City"""
 import models
 from models.base_model import BaseModel, Base
+from os import getenv
+import sqlalchemy
 from sqlalchemy import Column, String, ForeignKey
 from sqlalchemy.orm import relationship
 
 
 class City(BaseModel, Base):
-    """This is the class for City
-    Attributes:
-        state_id: The state id
-        name: input name
-    """
-    __tablename__ = 'cities'
-    name = Column(String(128), nullable=False)
-    state_id = Column(String(60), ForeignKey('states.id'), nullable=False)
-    state = relationship('State', back_populates='cities')
-    places = relationship('Place', cascade='all, delete', backref='cities')
+    """Representation of city """
+    if models.storage_t == "db":
+        __tablename__ = 'cities'
+        state_id = Column(String(60), ForeignKey('states.id'), nullable=False)
+        name = Column(String(128), nullable=False)
+        places = relationship("Place",
+                              backref="cities",
+                              cascade="all, delete, delete-orphan")
+    else:
+        state_id = ""
+        name = ""
